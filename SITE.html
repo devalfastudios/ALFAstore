@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALFA Studio - Проекти</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #050505;
+            --glass-bg: rgba(0, 85, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --primary-blue: #0066ff;
+            --accent-blue: #00d4ff;
+            --text-main: #ffffff;
+            --text-muted: #a0aab5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Blobs for Liquid Glass Effect */
+        .bg-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 12s infinite alternate ease-in-out;
+        }
+        .blob-1 {
+            top: -10%; left: -10%; width: 50vw; height: 50vw;
+            background: radial-gradient(circle, var(--primary-blue), transparent 70%);
+        }
+        .blob-2 {
+            bottom: -20%; right: -10%; width: 60vw; height: 60vw;
+            background: radial-gradient(circle, var(--accent-blue), transparent 70%);
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(5, 5, 5, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--text-main), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-switch select {
+            background: var(--glass-bg);
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            padding: 8px 16px;
+            border-radius: 12px;
+            outline: none;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .lang-switch select:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .lang-switch select option {
+            background: #111;
+            color: #fff;
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        /* Grid */
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        /* Liquid Glass Card */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 24px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s forwards;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(0, 102, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.3);
+            background: rgba(0, 85, 255, 0.08);
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .app-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+        }
+
+        .app-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .app-version {
+            font-size: 12px;
+            color: var(--accent-blue);
+            background: rgba(0, 212, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .app-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Material Button */
+        .btn {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-web {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-web:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-win {
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-win:hover {
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.6);
+            transform: scale(1.02);
+        }
+
+        .btn-disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            cursor: not-allowed;
+            border: 1px dashed var(--glass-border);
+        }
+
+        /* Material Ripple */
+        .btn::after {
+            content: "";
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .btn:active::after {
+            transform: scale(4);
+            opacity: 1;
+            transition: 0s;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 40px;
+            background: rgba(5, 5, 5, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .tg-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #0088cc;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            background: rgba(0, 136, 204, 0.1);
+            padding: 12px 24px;
+            border-radius: 100px;
+            transition: 0.3s;
+            border: 1px solid rgba(0, 136, 204, 0.3);
+        }
+
+        .tg-link:hover {
+            background: rgba(0, 136, 204, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <header>
+        <div class="logo">
+            <span class="material-icons-round">category</span>
+            ALFA Studio
+        </div>
+        <div class="lang-switch">
+            <select id="langSelector" onchange="changeLang(this.value)">
+                <option value="uk" selected>🇺🇦 Українська</option>
+                <option value="ru">🇷🇺 Русский</option>
+                <option value="en">🇬🇧 English</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="section-title" id="t-storeTitle">Проекти ALFA Studio</h1>
+        <div class="store-grid" id="appGrid">
+            </div>
+    </main>
+
+    <footer>
+        <a href="https://t.me/alfastudiosOFFICIAL" target="_blank" class="tg-link">
+            <span class="material-icons-round">send</span>
+            <span id="t-tgText">Приєднуйтесь до нашого Telegram</span>
+        </a>
+    </footer>
+
+    <script>
+        // --- DATA & TRANSLATIONS ---
+        const i18n = {
+            uk: {
+                storeTitle: "Проекти ALFA Studio",
+                tgText: "Приєднуйтесь до нашого Telegram",
+                btnWeb: "Браузер",
+                btnWin: "Windows",
+                btnSoon: "Ще не вийшов",
+                verPrefix: "Версія ",
+                verBeta: "Бета ",
+                noVer: "В розробці",
+                desc: {
+                    hiMsgOld: "Стара версія месенджера з підтримкою. Працює в браузері.",
+                    hiMsg: "Сучасний месенджер версії 2.0. Доступний для браузера та Windows.",
+                    atube: "Аналог YouTube. Оптимізовано для браузера на ПК.",
+                    gyperOs: "Операційна система створена на HTML. Найкраще підходить для ПК.",
+                    alfaUi: "Новий користувацький інтерфейс ALFA UI.",
+                    gcompHtml: "Потужний компілятор HTML прямо у вашому браузері.",
+                    gcompPy: "Браузерний компілятор Python.",
+                    gyperEx: "Заміна стандартному провіднику Windows, написана на C#.",
+                    gunlock: "Удосконалений диспетчер завдань для швидкого внесення змін у Windows.",
+                    mesearch: "Простий та легкий браузер для Windows.",
+                    megaCalc: "Прокачаний калькулятор з функціями, яких завжди не вистачає.",
+                    alfaBench: "Утиліта для перевірки характеристик та бенчмарку вашого пристрою."
+                }
+            },
+            ru: {
+                storeTitle: "Проекты ALFA Studio",
+                tgText: "Присоединяйтесь к нашему Telegram",
+                btnWeb: "Браузер",
+                btnWin: "Windows",
+                btnSoon: "Ещё не вышел",
+                verPrefix: "Версия ",
+                verBeta: "Бета ",
+                noVer: "В разработке",
+                desc: {
+                    hiMsgOld: "Старая версия мессенджера с поддержкой. Работает в браузере.",
+                    hiMsg: "Современный мессенджер версии 2.0. Доступен для браузера и Windows.",
+                    atube: "Аналог YouTube. Оптимизировано для браузера на ПК.",
+                    gyperOs: "Операционная система на базе HTML. Лучше всего подходит для ПК.",
+                    alfaUi: "Новый пользовательский интерфейс ALFA UI.",
+                    gcompHtml: "Мощный компилятор HTML прямо в вашем браузере.",
+                    gcompPy: "Браузерный компилятор Python.",
+                    gyperEx: "Замена стандартному проводнику Windows, написана на C#.",
+                    gunlock: "Улучшенный диспетчер задач для быстрого внесения изменений в Windows.",
+                    mesearch: "Простой и легкий браузер для Windows.",
+                    megaCalc: "Прокачанный калькулятор с функциями, которых всегда не хватает.",
+                    alfaBench: "Утилита для проверки характеристик и бенчмарка вашего устройства."
+                }
+            },
+            en: {
+                storeTitle: "ALFA Studio Projects",
+                tgText: "Join our Telegram channel",
+                btnWeb: "Web App",
+                btnWin: "Windows",
+                btnSoon: "Coming Soon",
+                verPrefix: "Version ",
+                verBeta: "Beta ",
+                noVer: "In Development",
+                desc: {
+                    hiMsgOld: "Old supported messenger version. Runs in the browser.",
+                    hiMsg: "Modern messenger version 2.0. Available for Web and Windows.",
+                    atube: "YouTube analog. Optimized for PC browser.",
+                    gyperOs: "HTML-based Operating System. Best suited for PC.",
+                    alfaUi: "Next-gen ALFA UI user interface.",
+                    gcompHtml: "Powerful HTML compiler right in your browser.",
+                    gcompPy: "Browser-based Python compiler.",
+                    gyperEx: "Windows file explorer replacement, written in C#.",
+                    gunlock: "Advanced task manager for quick system tweaks in Windows.",
+                    mesearch: "Simple and lightweight browser for Windows.",
+                    megaCalc: "Advanced calculator with highly requested missing features.",
+                    alfaBench: "Utility to check device specs and run benchmarks."
+                }
+            }
+        };
+
+        const projects = [
+            { id: "hiMsgOld", icon: "chat", title: "Hi Messenger OLD", version: "1.41", buttons: [{ type: "web", link: "#", ready: true }] },
+            { id: "hiMsg", icon: "forum", title: "Hi Messenger", version: "2.0", buttons: [{ type: "web", link: "#", ready: true }, { type: "win", link: "#", ready: true }] },
+            { id: "atube", icon: "smart_display", title: "ATube", version: null, buttons: [{ type: "web", link: "#", ready: false }] },
+            { id: "gyperOs", icon: "desktop_windows", title: "GyperOS", version: "1.0", buttons: [{ type: "web", link: "#", ready: true }] },
+            { id: "alfaUi", icon: "dashboard_customize", title: "ALFA UI", version: "2.0", buttons: [{ type: "web", link: "#", ready: false }] },
+            { id: "gcompHtml", icon: "html", title: "GComp HTML", version: "1.0", buttons: [{ type: "web", link: "#", ready: true }] },
+            { id: "gcompPy", icon: "code", title: "GComp Python", version: "1.0", buttons: [{ type: "web", link: "#", ready: false }] },
+            { id: "gyperEx", icon: "folder_open", title: "Gyper Ex", version: "beta1", buttons: [{ type: "win", link: "#", ready: false }] },
+            { id: "gunlock", icon: "admin_panel_settings", title: "GUnlock", version: "beta1", buttons: [{ type: "win", link: "#", ready: true }] },
+            { id: "mesearch", icon: "travel_explore", title: "MeSearch", version: null, buttons: [{ type: "win", link: "#", ready: false }] },
+            { id: "megaCalc", icon: "calculate", title: "MegaCalculator", version: "beta1", buttons: [{ type: "web", link: "#", ready: false }] },
+            { id: "alfaBench", icon: "speed", title: "ALFA Benchmark", version: "1.0", buttons: [{ type: "win", link: "#", ready: false }] }
+        ];
+
+        let currentLang = 'uk';
+
+        function renderStore() {
+            const t = i18n[currentLang];
+            
+            // Update static texts
+            document.getElementById('t-storeTitle').textContent = t.storeTitle;
+            document.getElementById('t-tgText').textContent = t.tgText;
+
+            const grid = document.getElementById('appGrid');
+            grid.innerHTML = ''; // Clear grid
+
+            projects.forEach((proj, index) => {
+                // Version formatting
+                let verText = t.noVer;
+                if (proj.version) {
+                    if (proj.version.includes("beta")) {
+                        verText = t.verBeta + proj.version.replace("beta", "");
+                    } else {
+                        verText = t.verPrefix + proj.version;
+                    }
+                }
+
+                // Buttons generation
+                let buttonsHtml = '';
+                proj.buttons.forEach(btn => {
+                    if (!btn.ready) {
+                        buttonsHtml += `<div class="btn btn-disabled">
+                            <span class="material-icons-round">hourglass_empty</span>
+                            ${t.btnSoon}
+                        </div>`;
+                    } else if (btn.type === "web") {
+                        buttonsHtml += `<a href="${btn.link}" class="btn btn-web">
+                            <span class="material-icons-round">language</span>
+                            ${t.btnWeb}
+                        </a>`;
+                    } else if (btn.type === "win") {
+                        buttonsHtml += `<a href="${btn.link}" class="btn btn-win">
+                            <span class="material-icons-round">window</span>
+                            ${t.btnWin}
+                        </a>`;
+                    }
+                });
+
+                // Card Template
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="app-icon"><span class="material-icons-round">${proj.icon}</span></div>
+                        <div>
+                            <div class="app-title">${proj.title}</div>
+                            <div class="app-version">${verText}</div>
+                        </div>
+                    </div>
+                    <div class="app-desc">${t.desc[proj.id]}</div>
+                    <div class="action-buttons">
+                        ${buttonsHtml}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function changeLang(lang) {
+            currentLang = lang;
+            renderStore();
+        }
+
+        // Initialize store on load
+        window.onload = renderStore;
+    </script>
+</body>
+</html>
