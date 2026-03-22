@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALFA Studio - Store v1.3</title>
+    <title>ALFA Studio - Store v1.4</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -22,7 +22,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; overflow-x: hidden; position: relative; }
 
-        /* Background Effects (GPU Accelerated) */
+        /* Background Effects */
         .bg-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; background: linear-gradient(to bottom right, #000000, #001220); }
         .blob { position: absolute; filter: blur(80px); opacity: 0.5; animation: float 15s infinite ease-in-out alternate; transform: translateZ(0); will-change: transform; }
         .blob-1 { width: 400px; height: 400px; background: var(--secondary-color); top: -10%; left: -10%; }
@@ -65,8 +65,14 @@
 
         /* Grid & Cards */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        .card { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 25px; cursor: pointer; transition: transform var(--transition-speed), box-shadow var(--transition-speed); position: relative; overflow: hidden; display: flex; align-items: center; gap: 15px; transform: translateZ(0); }
-        .card:hover { transform: translateY(-5px) translateZ(0); box-shadow: 0 10px 30px rgba(0, 210, 255, 0.15); border-color: rgba(0, 210, 255, 0.4); }
+        
+        @keyframes popIn {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .card { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 25px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; position: relative; overflow: hidden; display: flex; align-items: center; gap: 15px; opacity: 0; animation: popIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 210, 255, 0.15); border-color: rgba(0, 210, 255, 0.4); }
         .card-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--glass-border), var(--secondary-color)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; flex-shrink: 0; }
         .card-info { flex-grow: 1; }
         .card-title { font-size: 1.2rem; margin-bottom: 5px; }
@@ -133,7 +139,6 @@
         <div class="lang-switch">
             <select id="langSelect" onchange="changeLanguage(this.value)">
                 <option value="uk" selected>Українська</option>
-                <option value="ru">Русский</option>
                 <option value="en">English</option>
             </select>
         </div>
@@ -193,52 +198,55 @@
                 <div class="grid" id="rec-container"></div>
             </div>
         </div>
-        <footer>ALFA Store v 1.3 | © 2026 ALFA Studio</footer>
+        <footer>ALFA Store v 1.4 | © 2026 ALFA Studio</footer>
     </div>
 
     <script>
         const translations = {
             uk: {
                 search: "Пошук додатків...", heroTitle: "Магазин проєктів", heroDesc: "Офіційний портал додатків, систем та утиліт.",
-                btnBrowser: "В браузері", btnWin: "Завантажити для Windows", btnWip: "Скоро", badgeWip: "В розробці", dev: "Розробник: ALFA Studio",
+                btnBrowser: "В браузері", btnWin: "Завантажити для Windows", btnWip: "В розробці", badgeWip: "В розробці", dev: "Розробник: ALFA Studio",
                 back: "Назад", lblDesc: "Опис додатка", lblInfo: "Додаткова інформація", lblVer: "Версія:", lblRec: "Рекомендовані для вас",
-                cats: { all: "Всі", messenger: "Месенджери", system: "Системи", utility: "Утиліти", media: "Медіа та Дизайн", office: "Офіс" }
-            },
-            ru: {
-                search: "Поиск приложений...", heroTitle: "Магазин проектов", heroDesc: "Официальный портал приложений, систем и утилит.",
-                btnBrowser: "В браузере", btnWin: "Скачать для Windows", btnWip: "Скоро", badgeWip: "В разработке", dev: "Разработчик: ALFA Studio",
-                back: "Назад", lblDesc: "Описание приложения", lblInfo: "Дополнительная информация", lblVer: "Версия:", lblRec: "Рекомендовано вам",
-                cats: { all: "Все", messenger: "Мессенджеры", system: "Системы", utility: "Утилиты", media: "Медиа и Дизайн", office: "Офис" }
+                cats: { all: "Всі", messenger: "Месенджери", system: "Системи", utility: "Утиліти", media: "Медіа та Дизайн", office: "Офіс", game: "Ігри", education: "Освіта", ai: "ШІ" }
             },
             en: {
                 search: "Search apps...", heroTitle: "Projects Store", heroDesc: "Official portal of apps, systems, and utilities.",
-                btnBrowser: "Browser", btnWin: "Download for Windows", btnWip: "Coming Soon", badgeWip: "In Development", dev: "Developer: ALFA Studio",
+                btnBrowser: "Browser", btnWin: "Download for Windows", btnWip: "In Development", badgeWip: "In Development", dev: "Developer: ALFA Studio",
                 back: "Back", lblDesc: "App Description", lblInfo: "Additional Information", lblVer: "Version:", lblRec: "Recommended for you",
-                cats: { all: "All", messenger: "Messengers", system: "Systems", utility: "Utilities", media: "Media & Design", office: "Office" }
+                cats: { all: "All", messenger: "Messengers", system: "Systems", utility: "Utilities", media: "Media & Design", office: "Office", game: "Games", education: "Education", ai: "AI" }
             }
         };
 
-        const categories = ['all', 'messenger', 'system', 'utility', 'media', 'office'];
+        const categories = ['all', 'messenger', 'system', 'utility', 'media', 'office', 'game', 'education', 'ai'];
         let currentCategory = 'all';
         let currentLang = 'uk';
         let currentSearch = '';
 
         const projects = [
-            { id: 1, category: "messenger", title: "Hi Messenger OLD", version: "1.41", isWip: false, os: "Web Browser", desc: { uk: "Стара версія месенджера з підтримкою. Працює у браузері.", ru: "Старая версия мессенджера. Работает в браузере.", en: "Old messenger version. Runs in browser." }, buttons: [ { type: "browser", link: "https://sites.google.com/view/hi-messenger/messeger" } ] },
-            { id: 2, category: "messenger", title: "Hi Messenger", version: "2.0", isWip: false, os: "Windows / Web Browser", desc: { uk: "Оновлений сучасний месенджер.", ru: "Обновленный современный мессенджер.", en: "Updated modern messenger." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 3, category: "media", title: "ATube", version: "TBA", isWip: true, os: "Web Browser (PC)", desc: { uk: "Аналог YouTube. Оптимізовано для ПК.", ru: "Аналог YouTube. Оптимизировано для ПК.", en: "YouTube analog. Optimized for PC." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 4, category: "system", title: "GyperOS", version: "1.0", isWip: false, os: "Web Browser (PC)", desc: { uk: "Операційна система, створена на HTML.", ru: "Операционная система на HTML.", en: "HTML based OS." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 5, category: "system", title: "ALFA UI", version: "2.0", isWip: true, os: "Web Browser (Mobile)", desc: { uk: "Мобільна система на базі HTML.", ru: "Мобильная система на базе HTML.", en: "Mobile system based on HTML." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 6, category: "utility", title: "GComp HTML", version: "1.0", isWip: false, os: "Web Browser", desc: { uk: "Компілятор HTML прямо у вашому браузері.", ru: "Компилятор HTML в браузере.", en: "HTML compiler in browser." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 7, category: "utility", title: "GComp Python", version: "1.0", isWip: true, os: "Web Browser", desc: { uk: "Компілятор Python для браузера.", ru: "Компилятор Python для браузера.", en: "Python compiler for browser." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 8, category: "system", title: "GExp", version: "Beta 1", isWip: false, os: "Windows 7, 8, 8.1, 10, 11", desc: { uk: "Заміна стандартному провіднику Windows. Працює виключно на Windows.", ru: "Замена стандартному проводнику Windows. Работает только на Windows.", en: "Standard Windows explorer replacement. Works exclusively on Windows." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/4v46b8rimsa7xuv/GExp.zip/file" } ] },
-            { id: 9, category: "utility", title: "GUnlock", version: "1.0", isWip: false, os: "Windows", desc: { uk: "Покращений диспетчер завдань для Windows.", ru: "Улучшенный диспетчер задач для Windows.", en: "Advanced task manager for Windows." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/m2xtt9xgj9g14wh/Gunlock.rar/file" } ] },
-            { id: 10, category: "utility", title: "MeSearch", version: "TBA", isWip: true, os: "Windows", desc: { uk: "Простий і легкий браузер для Windows.", ru: "Простой браузер для Windows.", en: "Simple browser for Windows." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 11, category: "utility", title: "MegaCalculator", version: "1.0", isWip: false, os: "Web Browser", desc: { uk: "Прокачаний калькулятор з розширеним функціоналом.", ru: "Прокачанный калькулятор.", en: "Advanced calculator." }, buttons: [ { type: "browser", link: "https://devalfastudios.github.io/MegaCalculator/" } ] },
-            { id: 12, category: "utility", title: "ALFA Benchmark", version: "1.0", isWip: true, os: "Windows", desc: { uk: "Утиліта для перевірки характеристик пристрою.", ru: "Утилита для проверки характеристик.", en: "Device specification utility." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 13, category: "media", title: "GPaint", version: "Beta 2.1", isWip: false, os: "Web Browser", desc: { uk: "Простий Paint для малювання у браузері (версія для ПК у розробці).", ru: "Простой Paint для рисования в браузере (версия для ПК в разработке).", en: "Simple Paint for drawing in browser (PC version in development)." }, buttons: [ { type: "browser", link: "https://devalfastudios.github.io/GPaint/" } ] },
-            { id: 14, category: "media", title: "APhoto", version: "1.0", isWip: true, os: "Windows (Web Browser)", desc: { uk: "Покращений редактор для фото з простим і зрозумілим інтерфейсом.", ru: "Улучшенный фоторедактор с простым интерфейсом.", en: "Improved photo editor with simple interface." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 15, category: "office", title: "GWord", version: "TBA", isWip: false, os: "Windows 7, 8, 8.1, 10, 11", desc: { uk: "Покращений і безкоштовний аналог Microsoft Word. Лише для Windows.", ru: "Улучшенный и бесплатный аналог Microsoft Word. Только для Windows.", en: "Improved and free Microsoft Word analog. Windows only." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/po2lwvqp1rd6m41/GWord.rar/file" } ] }
+            { id: 1, category: "messenger", title: "Hi Messenger OLD", version: "1.41", isWip: false, os: "Web Browser", desc: { uk: "Стара версія месенджера з підтримкою. Працює у браузері.", en: "Old messenger version. Runs in browser." }, buttons: [ { type: "browser", link: "https://sites.google.com/view/hi-messenger/messeger" } ] },
+            { id: 2, category: "messenger", title: "Hi Messenger", version: "2.0", isWip: true, os: "Windows / Web Browser", desc: { uk: "Оновлений сучасний месенджер.", en: "Updated modern messenger." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 3, category: "media", title: "ATube", version: "TBA", isWip: true, os: "Web Browser (PC)", desc: { uk: "Аналог YouTube. Оптимізовано для ПК.", en: "YouTube analog. Optimized for PC." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 4, category: "system", title: "GyperOS", version: "1.0", isWip: true, os: "Web Browser (PC)", desc: { uk: "Операційна система, створена на HTML.", en: "HTML based OS." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 5, category: "system", title: "ALFA UI", version: "2.0", isWip: true, os: "Web Browser (Mobile)", desc: { uk: "Мобільна система на базі HTML.", en: "Mobile system based on HTML." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 6, category: "utility", title: "GComp HTML", version: "1.0", isWip: true, os: "Web Browser", desc: { uk: "Компілятор HTML прямо у вашому браузері.", en: "HTML compiler in browser." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 7, category: "utility", title: "GComp Python", version: "1.0", isWip: true, os: "Web Browser", desc: { uk: "Компілятор Python для браузера.", en: "Python compiler for browser." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 8, category: "system", title: "GExp", version: "Beta 1", isWip: false, os: "Windows 7, 8, 8.1, 10, 11", desc: { uk: "Заміна стандартному провіднику Windows. Працює виключно на Windows.", en: "Standard Windows explorer replacement. Works exclusively on Windows." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/4v46b8rimsa7xuv/GExp.zip/file" } ] },
+            { id: 9, category: "utility", title: "GUnlock", version: "1.0", isWip: false, os: "Windows", desc: { uk: "Покращений диспетчер завдань для Windows.", en: "Advanced task manager for Windows." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/m2xtt9xgj9g14wh/Gunlock.rar/file" } ] },
+            { id: 10, category: "utility", title: "MeSearch", version: "TBA", isWip: true, os: "Android", desc: { uk: "Простий і легкий браузер для Android ( мобільна версія GSearch).", en: "Simple browser for Android." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 11, category: "utility", title: "MegaCalculator", version: "1.0", isWip: false, os: "Web Browser", desc: { uk: "Прокачаний калькулятор з розширеним функціоналом.", en: "Advanced calculator." }, buttons: [ { type: "browser", link: "https://devalfastudios.github.io/MegaCalculator/" } ] },
+            { id: 12, category: "utility", title: "ALFA Benchmark", version: "1.0", isWip: true, os: "Windows", desc: { uk: "Утиліта для перевірки характеристик пристрою.", en: "Device specification utility." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 13, category: "media", title: "GPaint", version: "Beta 2.1", isWip: false, os: "Web Browser", desc: { uk: "Простий Paint для малювання у браузері (версія для ПК у розробці).", en: "Simple Paint for drawing in browser (PC version in development)." }, buttons: [ { type: "browser", link: "https://devalfastudios.github.io/GPaint/" } ] },
+            { id: 14, category: "media", title: "APhoto", version: "1.0", isWip: true, os: "Windows (Web Browser)", desc: { uk: "Покращений редактор для фото з простим і зрозумілим інтерфейсом.", en: "Improved photo editor with simple interface." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 15, category: "office", title: "GWord", version: "TBA", isWip: false, os: "Windows 7, 8, 8.1, 10, 11", desc: { uk: "Покращений і безкоштовний аналог Microsoft Word. Лише для Windows.", en: "Improved and free Microsoft Word analog. Windows only." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/po2lwvqp1rd6m41/GWord.rar/file" } ] },
+            { id: 16, category: "system", title: "G9 Launcher", version: "1.0", isWip: false, os: "Windows", desc: { uk: "Лаунчер для зручного та швидкого запуску додатків на вашому ПК.", en: "Launcher for convenient and fast app starting on your PC." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/1wa0t9f0or6y7ss/G9_Launcher.rar/file" } ] },
+            { id: 17, category: "utility", title: "GSearch", version: "1.0", isWip: false, os: "Windows", desc: { uk: "Швидкий та зручний пошуковий інструмент для ваших потреб.", en: "Fast and convenient search tool for your needs." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/10d658je7qzf5jc/GSearch.rar/file" } ] },
+            { id: 18, category: "system", title: "GExplorer", version: "1.0", isWip: false, os: "Windows", desc: { uk: "Сучасний та інтуїтивно зрозумілий провідник файлів.", en: "Modern and intuitive file explorer." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/errv0ny4xvul9yn/GExplorer.rar/file" } ] },
+            { id: 19, category: "office", title: "NeoTables", version: "TBA", isWip: true, os: "Web Browser", desc: { uk: "Потужний аналог Google Таблиць для роботи з даними.", en: "Powerful Google Sheets analog for data management." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 20, category: "utility", title: "Mapser", version: "TBA", isWip: true, os: "Web Browser", desc: { uk: "Аналог Google Карт для швидкої та зручної навігації.", en: "Google Maps analog for fast and convenient navigation." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 21, category: "game", title: "Project Leouma", version: "TBA", isWip: true, os: "Windows", desc: { uk: "Динамічна та захоплююча гра в жанрі шутер.", en: "Dynamic and exciting shooter game." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 22, category: "system", title: "ExOS", version: "TBA", isWip: true, os: "Windows / Web Browser", desc: { uk: "Нова інноваційна операційна система від нашої студії.", en: "New innovative operating system from our studio." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 23, category: "education", title: "Досьє Елемента", version: "TBA", isWip: true, os: "Web Browser", desc: { uk: "Детальний довідник про хімічні елементи та корисні наукові поради.", en: "Detailed guide about chemical elements and useful science tips." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 24, category: "ai", title: "Coreo AI", version: "TBA", isWip: true, os: "Web Browser / Windows", desc: { uk: "Ваш персональний розумний помічник зі штучним інтелектом.", en: "Your personal smart assistant with artificial intelligence." }, buttons: [ { type: "wip", link: "#" } ] }
         ];
 
         function renderFilters() {
@@ -252,7 +260,7 @@
                 btn.innerText = t[cat];
                 btn.onclick = () => {
                     currentCategory = cat;
-                    renderFilters(); // Оновлюємо активний стан кнопок
+                    renderFilters(); 
                     renderProjects();
                 };
                 container.appendChild(btn);
@@ -264,10 +272,8 @@
             container.innerHTML = '';
             const t = translations[currentLang];
 
-            // Фільтрація за пошуком
             let filtered = projects.filter(p => p.title.toLowerCase().includes(currentSearch.toLowerCase()));
             
-            // Фільтрація за категорією (тільки для головної сторінки, не для рекомендацій)
             if (containerId === 'projects-container' && currentCategory !== 'all') {
                 filtered = filtered.filter(p => p.category === currentCategory);
             }
@@ -280,9 +286,11 @@
                 return;
             }
 
-            filtered.forEach(proj => {
+            filtered.forEach((proj, index) => {
                 const card = document.createElement('div');
                 card.className = 'card';
+                // Додаємо затримку анімації для ефекту "хвилі"
+                card.style.animationDelay = `${index * 0.05}s`;
                 card.onclick = () => openApp(proj.id);
                 
                 let wipBadge = proj.isWip ? `<span class="badge-wip">${t.badgeWip}</span>` : '';
@@ -348,7 +356,7 @@
                 loader.classList.remove('active'); 
                 
                 renderProjects('rec-container', 6, id);
-            }, 1000); 
+            }, 800); 
         }
 
         function populateAppDetails(proj) {
