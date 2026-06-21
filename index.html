@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALFA Studio - Store v1.4</title>
+    <title>ALFA Studio - Store v1.5</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -152,10 +152,12 @@
 
         <div class="container">
             <div class="filters" id="filters-container">
-                </div>
+                <!-- Кнопки генеруються JS -->
+            </div>
 
             <div class="grid" id="projects-container">
-                </div>
+                <!-- Картки генеруються JS -->
+            </div>
         </div>
     </div>
 
@@ -198,7 +200,7 @@
                 <div class="grid" id="rec-container"></div>
             </div>
         </div>
-        <footer>ALFA Store v 1.4 | © 2026 ALFA Studio</footer>
+        <footer>ALFA Store v 1.5 | © 2026 ALFA Studio</footer>
     </div>
 
     <script>
@@ -229,16 +231,14 @@
             { id: 4, category: "system", title: "GyperOS", version: "1.0", isWip: true, os: "Web Browser (PC)", desc: { uk: "Операційна система, створена на HTML.", en: "HTML based OS." }, buttons: [ { type: "wip", link: "#" } ] },
             { id: 5, category: "system", title: "ALFA UI", version: "2.0", isWip: true, os: "Web Browser (Mobile)", desc: { uk: "Мобільна система на базі HTML.", en: "Mobile system based on HTML." }, buttons: [ { type: "wip", link: "#" } ] },
             { id: 6, category: "utility", title: "GComp HTML", version: "1.0", isWip: true, os: "Web Browser", desc: { uk: "Компілятор HTML прямо у вашому браузері.", en: "HTML compiler in browser." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 7, category: "utility", title: "GComp Python", version: "1.0", isWip: true, os: "Web Browser", desc: { uk: "Компілятор Python для браузера.", en: "Python compiler for browser." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 8, category: "system", title: "GExp", version: "Beta 1", isWip: false, os: "Windows 7, 8, 8.1, 10, 11", desc: { uk: "Заміна стандартному провіднику Windows. Працює виключно на Windows.", en: "Standard Windows explorer replacement. Works exclusively on Windows." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/4v46b8rimsa7xuv/GExp.zip/file" } ] },
             { id: 9, category: "utility", title: "GUnlock", version: "1.0", isWip: false, os: "Windows", desc: { uk: "Покращений диспетчер завдань для Windows.", en: "Advanced task manager for Windows." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/m2xtt9xgj9g14wh/Gunlock.rar/file" } ] },
-            { id: 10, category: "utility", title: "MeSearch", version: "TBA", isWip: true, os: "Android", desc: { uk: "Простий і легкий браузер для Android ( мобільна версія GSearch).", en: "Simple browser for Android." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 10, category: "utility", title: "MeSearch", version: "TBA", isWip: true, os: "Windows", desc: { uk: "Простий і легкий браузер для Windows.", en: "Simple browser for Windows." }, buttons: [ { type: "wip", link: "#" } ] },
             { id: 11, category: "utility", title: "MegaCalculator", version: "1.0", isWip: false, os: "Web Browser", desc: { uk: "Прокачаний калькулятор з розширеним функціоналом.", en: "Advanced calculator." }, buttons: [ { type: "browser", link: "https://devalfastudios.github.io/MegaCalculator/" } ] },
             { id: 12, category: "utility", title: "ALFA Benchmark", version: "1.0", isWip: true, os: "Windows", desc: { uk: "Утиліта для перевірки характеристик пристрою.", en: "Device specification utility." }, buttons: [ { type: "wip", link: "#" } ] },
             { id: 13, category: "media", title: "GPaint", version: "Beta 2.1", isWip: false, os: "Web Browser", desc: { uk: "Простий Paint для малювання у браузері (версія для ПК у розробці).", en: "Simple Paint for drawing in browser (PC version in development)." }, buttons: [ { type: "browser", link: "https://devalfastudios.github.io/GPaint/" } ] },
             { id: 14, category: "media", title: "APhoto", version: "1.0", isWip: true, os: "Windows (Web Browser)", desc: { uk: "Покращений редактор для фото з простим і зрозумілим інтерфейсом.", en: "Improved photo editor with simple interface." }, buttons: [ { type: "wip", link: "#" } ] },
             { id: 15, category: "office", title: "GWord", version: "TBA", isWip: false, os: "Windows 7, 8, 8.1, 10, 11", desc: { uk: "Покращений і безкоштовний аналог Microsoft Word. Лише для Windows.", en: "Improved and free Microsoft Word analog. Windows only." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/po2lwvqp1rd6m41/GWord.rar/file" } ] },
-            { id: 16, category: "system", title: "G9 Launcher", version: "1.0", isWip: false, os: "Windows", desc: { uk: "Лаунчер для зручного та швидкого запуску додатків на вашому ПК.", en: "Launcher for convenient and fast app starting on your PC." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/lh8qvy374oyv814/G9_Launcher.rar/file" } ] },
+            { id: 16, category: "system", title: "G9 Launcher", version: "1.5", isWip: false, os: "Windows", desc: { uk: "Лаунчер для зручного та швидкого запуску додатків на вашому ПК.", en: "Launcher for convenient and fast app starting on your PC." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/1wa0t9f0or6y7ss/G9_Launcher.rar/file" } ] },
             { id: 17, category: "utility", title: "GSearch", version: "1.0", isWip: false, os: "Windows", desc: { uk: "Швидкий та зручний пошуковий інструмент для ваших потреб.", en: "Fast and convenient search tool for your needs." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/10d658je7qzf5jc/GSearch.rar/file" } ] },
             { id: 18, category: "system", title: "GExplorer", version: "1.0", isWip: false, os: "Windows", desc: { uk: "Сучасний та інтуїтивно зрозумілий провідник файлів.", en: "Modern and intuitive file explorer." }, buttons: [ { type: "windows", link: "https://www.mediafire.com/file/errv0ny4xvul9yn/GExplorer.rar/file" } ] },
             { id: 19, category: "office", title: "NeoTables", version: "TBA", isWip: true, os: "Web Browser", desc: { uk: "Потужний аналог Google Таблиць для роботи з даними.", en: "Powerful Google Sheets analog for data management." }, buttons: [ { type: "wip", link: "#" } ] },
@@ -246,7 +246,8 @@
             { id: 21, category: "game", title: "Project Leouma", version: "TBA", isWip: true, os: "Windows", desc: { uk: "Динамічна та захоплююча гра в жанрі шутер.", en: "Dynamic and exciting shooter game." }, buttons: [ { type: "wip", link: "#" } ] },
             { id: 22, category: "system", title: "ExOS", version: "TBA", isWip: true, os: "Windows / Web Browser", desc: { uk: "Нова інноваційна операційна система від нашої студії.", en: "New innovative operating system from our studio." }, buttons: [ { type: "wip", link: "#" } ] },
             { id: 23, category: "education", title: "Досьє Елемента", version: "TBA", isWip: true, os: "Web Browser", desc: { uk: "Детальний довідник про хімічні елементи та корисні наукові поради.", en: "Detailed guide about chemical elements and useful science tips." }, buttons: [ { type: "wip", link: "#" } ] },
-            { id: 24, category: "ai", title: "Coreo AI", version: "TBA", isWip: true, os: "Web Browser / Windows", desc: { uk: "Ваш персональний розумний помічник зі штучним інтелектом.", en: "Your personal smart assistant with artificial intelligence." }, buttons: [ { type: "wip", link: "#" } ] }
+            { id: 24, category: "ai", title: "Coreo AI", version: "TBA", isWip: true, os: "Web Browser / Windows", desc: { uk: "Ваш персональний розумний помічник зі штучним інтелектом.", en: "Your personal smart assistant with artificial intelligence." }, buttons: [ { type: "wip", link: "#" } ] },
+            { id: 25, category: "utility", title: "FYW (Fix Your Windows)", version: "TBA", isWip: true, os: "Windows", desc: { uk: "Утиліта для швидкого виправлення помилок та оптимізації Windows.", en: "Utility for quick error fixing and Windows optimization." }, buttons: [ { type: "wip", link: "#" } ] }
         ];
 
         function renderFilters() {
@@ -289,7 +290,6 @@
             filtered.forEach((proj, index) => {
                 const card = document.createElement('div');
                 card.className = 'card';
-                // Додаємо затримку анімації для ефекту "хвилі"
                 card.style.animationDelay = `${index * 0.05}s`;
                 card.onclick = () => openApp(proj.id);
                 
